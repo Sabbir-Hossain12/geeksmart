@@ -1,0 +1,53 @@
+/*your custom css goes here*/
+
+/*your custom css goes here*/
+
+.top-navbar {
+    background-color: #fcdf77 !important;
+}
+
+.border-gray-200 {
+    background-color: #fcdf77 !important;
+}
+
+.cat-name {
+    font-size: 15px !important;
+}
+
+.align-items-baseline {
+    background-color: #fcdf77 !important;
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -12px;
+}
+
+.cat-image {
+    font-size: 40px;
+    height: 30px;
+    width: 30px;
+}
+
+.list-inline-item {
+    color: black;
+    opacity: 1 !important;
+}
+
+/*.sub-cat-menu{*/
+
+/*     background-color:#FCCA19 !important;*/
+
+/*}*/
+
+.aiz-category-menu {
+    background-color: #fcdf77 !important;
+}
+
+.cus-fb {
+    color: blue;
+}
+
+.cus-insta {
+    color: red;
+}
