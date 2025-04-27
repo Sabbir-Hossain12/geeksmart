@@ -41,7 +41,7 @@
     <meta property="fb:app_id" content="">
 
     <!-- Favicon -->
-    <link rel="icon" href="">
+    <link rel="icon" href="{{ asset($basicinfo->favicon) }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
@@ -198,51 +198,43 @@
 
 <script>
     $(document).ready(function() {
+        {{--$('.category-nav-element').each(function(i, el) {--}}
+        {{--    $(el).on('mouseover', function() {--}}
+        {{--        if (!$(el).find('.sub-cat-menu').hasClass('loaded')) {--}}
+        {{--            $('.sub-cat-menu').empty();--}}
+        {{--            $.post('/subcategories-by-category', {--}}
+        {{--                _token: {{ csrf_token() }},--}}
+        {{--                id: $(el).data('id')--}}
+        {{--            }, function(data) {--}}
+        {{--                $(el).find('.sub-cat-menu card.shadow-none.border-0').addClass('loaded').html(data);--}}
+        {{--            });--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
+
         $('.category-nav-element').each(function(i, el) {
             $(el).on('mouseover', function() {
                 if (!$(el).find('.sub-cat-menu').hasClass('loaded')) {
-                    $.post('https://geekmartbd.com/category/nav-element-list', {
-                        _token: AIZ.data.csrf,
-                        id: $(el).data('id')
-                    }, function(data) {
-                        $(el).find('.sub-cat-menu').addClass('loaded').html(data);
+                    // $('.sub-cat-menu').empty();
+
+                    $.ajax({
+                        url: 'subcategories-by-category',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: $(el).data('id')
+                        },
+                        success: function(data) {
+                            $(el).find('.sub-cat-menu .card.shadow-none.border-0').addClass('loaded').html(data);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', error);
+                        }
                     });
                 }
             });
         });
-        if ($('#lang-change').length > 0) {
-            $('#lang-change .dropdown-menu a').each(function() {
-                $(this).on('click', function(e) {
-                    e.preventDefault();
-                    var $this = $(this);
-                    var locale = $this.data('flag');
-                    $.post('https://geekmartbd.com/language', {
-                        _token: AIZ.data.csrf,
-                        locale: locale
-                    }, function(data) {
-                        location.reload();
-                    });
 
-                });
-            });
-        }
-
-        if ($('#currency-change').length > 0) {
-            $('#currency-change .dropdown-menu a').each(function() {
-                $(this).on('click', function(e) {
-                    e.preventDefault();
-                    var $this = $(this);
-                    var currency_code = $this.data('currency');
-                    $.post('https://geekmartbd.com/currency', {
-                        _token: AIZ.data.csrf,
-                        currency_code: currency_code
-                    }, function(data) {
-                        location.reload();
-                    });
-
-                });
-            });
-        }
     });
 
     $('#search').on('keyup', function() {

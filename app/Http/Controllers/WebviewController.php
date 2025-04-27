@@ -168,7 +168,7 @@ class WebviewController extends Controller
     {
         $categories = Category::where('status', 'Active')->select('id', 'category_name', 'category_icon', 'slug')->get();
         $sliders = Slider::where('status', 'Active')->select('id', 'slider_btn_link', 'slider_title', 'slider_image')->get();
-        $adds = Addbanner::where('status', 'Active')->whereIn('id', ['1', '2'])->select('id', 'add_link', 'add_image', 'status')->get();
+        $adds = Addbanner::where('status', 'Active')->whereIn('id', ['1', '2','5'])->select('id', 'add_link', 'add_image', 'status')->get();
         $addbottoms = Addbanner::where('status', 'Active')->whereIn('id', ['3', '4'])->select('id', 'add_link', 'add_image', 'status')->get();
 
         $topproducts = Mainproduct::where('status', 'Active')->where('top_rated', '1')->orderByRaw('ISNULL(`position`), `position` ASC')->select('id', 'ProductName', 'ProductSlug', 'ProductImage', 'status', 'position', 'top_rated', 'RelatedProductIds')->inRandomOrder()->take(8)->get();
@@ -668,5 +668,12 @@ class WebviewController extends Controller
         } else {
             return response()->json('Error', 200);
         }
+    }
+
+    public function subcatByCat(Request $request)
+    {
+        $subcategories = Subcategory::where('category_id', $request->id)->where('status', 'Active')->get();
+
+        return view('webview2.partials.subcategories', compact('subcategories'))->render();
     }
 }

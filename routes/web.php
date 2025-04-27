@@ -43,12 +43,13 @@ Route::get('products/category/{slug}', [WebviewController::class, 'categoryprodu
 Route::get('products/brand/{slug}', [WebviewController::class, 'brandproduct']);
 Route::get('get/products/by-category', [WebviewController::class, 'getcategoryproduct']);
 Route::get('get/products/by-subcategory', [WebviewController::class, 'getsubcategoryproduct']);
-Route::get('products/sub/category/{slug}', [WebviewController::class, 'subcategoryproduct']);
+Route::get('products/sub/category/{slug}', [WebviewController::class, 'subcategoryproduct'])->name('subcategoryproduct');
 Route::get('/search', [WebviewController::class, 'search'])->name('search');
 Route::get('/combo-offer', [WebviewController::class, 'combo'])->name('combo');
 Route::get('load/related-product', [WebviewController::class, 'loadrelatedpro']);
 
 Route::get('category-info-ajax', [WebviewController::class, 'categoryinfoajax']);
+Route::post('/subcategories-by-category', [WebviewController::class, 'subcatByCat']);
 
 Route::get('get/slug/products', [WebviewController::class, 'getslugproduct']);
 Route::get('view/categories', [WebviewController::class, 'allcategories']);
